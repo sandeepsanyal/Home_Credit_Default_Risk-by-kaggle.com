@@ -7,11 +7,12 @@ file_names = c(c()
                # ,"previous_application"
                 # ,"application_test"
                ,"application_train"
-               # ,"bureau"
+               ,"bureau"
                )
 for(names in file_names){
   assign(names,
-         read.csv(file = paste("D:\\Sandeep\\Kaggle\\Home Credit Default Risk\\datasets\\", names, ".csv", sep = ""),
+         read.csv(file = paste("/Users/sandeepsanyal/OneDrive/Github/Home_Credit_Default_Risk-by-kaggle.com/raw_datasets/",
+                               names, ".csv", sep = ""),
                   na.strings = c("", " ", "NULL", "NA", "na"),
                   stringsAsFactors = FALSE))
 }
