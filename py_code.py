@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import statsmodels
 import statsmodels.discrete.discrete_model as sm
+from scipy import stats
 import sys
 
 # importing user defined functions
@@ -10,7 +11,7 @@ sys.path.insert(0, "/Users/sandeepsanyal/PycharmProjects/tools/Python")
 from missing_values import check_missing_values
 
 # folder path
-directory = r"/Users/sandeepsanyal/OneDrive/Github/Home_Credit_Default_Risk-by-kaggle.com"
+directory = r"/Users/sandeepsanyal/Library/Mobile Documents/com~apple~CloudDocs/Github/Home_Credit_Default_Risk-by-kaggle.com"
 
 # Importing application_train.csv
 application_train = pd.read_csv(
@@ -150,6 +151,13 @@ cat_vars = [
 # correlation matrix
 cor_mat = application_train[numeric_vars].corr()
 
+stats.chisquare(
+    f_obs=train_data[dep_var].tolist(),
+    f_exp=application_train[cat_vars].values.tolist(),
+    axis=1
+)
+
+
 # missing values in application_train
 missing_values = check_missing_values(
     df=application_train,
@@ -164,6 +172,7 @@ logit=sm.Logit(
     missing='drop'
 )
 print(logit.fit().summary())
+
 
 
 
